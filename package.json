@@ -1,16 +1,16 @@
 {
-  "name": "curso-webpack",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "webpack": "^5.38.1",
-    "webpack-cli": "^4.7.2"
-  }
+    "name": "curso-webpack",
+    "version": "1.0.0",
+    "description": "Conceptos solidos de webpack desde su implementacion a uso de comandos y configuraciones.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "by Platzi Course",
+    "license": "ISC",
+    "devDependencies": {
+        "webpack": "^5.38.1",
+        "webpack-cli": "^4.7.2"
+    }
 }
