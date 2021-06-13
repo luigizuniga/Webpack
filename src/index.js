@@ -1,7 +1,7 @@
-import sum from './utils/sum.js';
+import Template from './templates/Template.js';
+console.log('hola');
 
-const hi = "Hello";
-console.log(hi);
-
-// uso de funcion suma
-console.log(sum(5,42));
+(async function App() {
+  const main = null || document.getElementById('main');
+  main.innerHTML = await Template();
+})();

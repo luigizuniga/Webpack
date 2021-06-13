@@ -1,16 +1,28 @@
 {
-    "name": "curso-webpack",
-    "version": "1.0.0",
-    "description": "Conceptos solidos de webpack desde su implementacion a uso de comandos y configuraciones.",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [],
-    "author": "by Platzi Course",
-    "license": "ISC",
-    "devDependencies": {
-        "webpack": "^5.38.1",
-        "webpack-cli": "^4.7.2"
-    }
+  "name": "js-portfolio",
+  "version": "1.0.0",
+  "description": "A minimal portfolio with Vanilla JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gndx/js-portfolio.git"
+  },
+  "keywords": [
+    "javascript",
+    "html",
+    "css"
+  ],
+  "author": "oscar barajas <oscar@gndx.dev>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gndx/js-portfolio/issues"
+  },
+  "homepage": "https://github.com/gndx/js-portfolio#readme",
+  "devDependencies": {
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2"
+  }
 }
