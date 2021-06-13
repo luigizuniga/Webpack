@@ -15,5 +15,17 @@ module.exports = {
     // Aqui ponemos las extensiones que tendremos en nuestro proyecto para webpack los lea
     resolve: {
         extensions: ['.js']
+    },
+    module: {
+        rules: [{
+            // Test declara que extensión de archivos aplicara el loader
+            test: /\.js$/,
+            // Exclude permite omitir archivos o carpetas especificas en este caso de node_modules
+            exclude: /node_modules/,
+            // Use es un arreglo u objeto donde dices que loader aplicaras
+            use: {
+                loader: 'babel-loader'
+            }
+        }]
     }
 }

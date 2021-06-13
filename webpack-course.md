@@ -10,6 +10,7 @@
 
 [Configuración de webpack config](https://www.notion.so/Configuraci-n-de-webpack-config-6bfdc599d5c44306861a7ac023e02475)
 
+[Babel Loader para JavaScript](https://www.notion.so/Babel-Loader-para-JavaScript-ffb227ce1aaa40298e5f7115ed052043)
 
 # ¿Qué es Webpack?
 
@@ -226,3 +227,52 @@ Para configurar una manera resumida este comando, ingresamos a nuestro package.j
     "build": "webpack --mode production --config webpack.config.js"
   },
 ```
+
+# Babel Loader para JavaScript
+
+Babel permite hacer compatible tu código JavaScript con todos los navegadores solucionando problemas de compatibilidad
+
+Se deben añadir las siguientes dependencias a nuestro proyecto:
+
+```jsx
+npm install -D babel-loader @babel/core @babel/preset-env @babel/plugin-transform-runtime
+```
+
+- **babel-loader**  permite usar babel con webpack
+- **@babel/core** es babel en general
+- **@babel/preset-env** permite usar las ultimas características de JavaScript
+- **@babel/plugin-transform-runtime** te permite trabajar con eventos asincronos como  `async` y `await`
+
+Debes crear el archivo de configuración de babel el cual tiene como nombre `.babelrc`
+
+contenido `.babelrc`
+
+```jsx
+{
+  "presets": [
+    "@babel/preset-env"
+  ],
+  "plugins": [
+    "@babel/plugin-transform-runtime"
+  ]
+}
+```
+
+Para utilizar babel en webpack añadir la siguiente configuración en `webpack.config.js`
+
+```jsx
+module: {
+rules: [{
+*// Test declara que extensión de archivos aplicara el loader*
+test: /\.js$/,
+*// Exclude permite omitir archivos o carpetas especificas en este caso de node_modules*
+exclude: /node_modules/,
+*// Use es un arreglo u objeto donde dices que loader aplicaras*
+use: {
+	loader: 'babel-loader'
+		}
+	}]
+}
+```
+
+Babel nos ayuda a transpilar el código JavaScript el cual todos los navegadores puedan entender Contiene “extensiones” o plugins las cuales nos permiten tener características más allá del JavaScript común.
