@@ -12,6 +12,11 @@
 
 [Babel Loader para JavaScript](https://www.notion.so/Babel-Loader-para-JavaScript-ffb227ce1aaa40298e5f7115ed052043)
 
+[Loader para CSS y Preprocesadores de CSS](null)
+
+[Copia de archivos con webpack](null)
+
+
 # ¿Qué es Webpack?
 
 ## Ideas/conceptos claves
@@ -276,3 +281,89 @@ use: {
 ```
 
 Babel nos ayuda a transpilar el código JavaScript el cual todos los navegadores puedan entender Contiene “extensiones” o plugins las cuales nos permiten tener características más allá del JavaScript común.
+
+# Loader para CSS y Preprocesadores de CSS
+
+**¿Qué es un preprocesador?** En pocas palabras, un **preprocesador** te permite escribir CSS en un idioma alternativo (no te preocupes, es muy parecido al CSS nativo) y ofrece funciones avanzadas como variables, funciones y la posibilidad de incluir archivos. En resumen, te ayudan a escribir de manera más simple para organizar mejor tu código.
+
+Existen varios **preprocesadores** CSS de los cuales escoger, sin embargo, la mayoría de preprocesadores CSS añadirán algunas características que no existen en CSS puro, como variable, mixins, selectores anidados, entre otros. Estas características hacen la estructura de CSS más legible y fácil de mantener.
+
+**post procesadores** son herramientas que procesan el CSS y lo transforman en una nueva hoja de CSS que le permiten optimizar y automatizar los estilos para los navegadores actuales.
+
+Para dar soporte a CSS en webpack debes instalar los siguientes paquetes
+
+```jsx
+npm i mini-css-extract-plugin css-loader -D
+```
+
+- css-loader ⇒ Loader para reconocer CSS
+- mini-css-extract-plugin ⇒ Extrae el CSS en archivos
+- Para comenzar debemos agregar las configuraciones de webpack
+
+```jsx
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+	...,
+	module: {
+    rules: [
+      {
+        test: /\.(css|styl)$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+        ]
+      }
+    ]
+  },
+  plugins: [
+		...
+    new MiniCssExtractPlugin(),
+  ]
+}
+```
+
+Podemos añadir herramientas CSS como puede ser:
+
+- **pre procesadores**
+    - Sass
+    - Less
+    - Stylus
+- **post procesadores**
+    - Post CSS
+
+
+# Copia de archivos con webpack
+
+Si tienes la necesidad de mover un archivo o directorio a tu proyecto final podemos usar un plugin llamado “**copy-webpack-plugin**”
+
+Para instalarlo debemos ejecutar el comando
+
+```jsx
+npm i copy-webpack-plugin -D
+```
+
+Para poder comenzar a usarlo debemos agregar estas configuraciones a `webpack.config.js`
+
+```jsx
+...
+const CopyPlugin = require('copy-webpack-plugin');
+	module.exports = {
+	...
+	  plugins: [
+			**new** CopyPlugin({
+      patterns: [
+        {
+					**from** : path.resolve(__dirname, "src", "assets/images"),
+          to: "assets/images"
+        }
+      ]
+    }),
+  ]
+}
+```
+
+Es importante las propiedades from y to
+
+- **From** ⇒ que recurso (archivo o directorio) deseamos copiar al directorio final
+- **To** ⇒ en que ruta dentro de la carpeta final terminara los recursos
