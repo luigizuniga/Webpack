@@ -16,6 +16,9 @@
 
 [Copia de archivos con webpack](null)
 
+[Loaders de fuentes](null)
+
+
 
 # ¿Qué es Webpack?
 
@@ -367,3 +370,67 @@ Es importante las propiedades from y to
 
 - **From** ⇒ que recurso (archivo o directorio) deseamos copiar al directorio final
 - **To** ⇒ en que ruta dentro de la carpeta final terminara los recursos
+
+
+# Loaders de fuentes
+
+El uso de Loaders de Fuentes es util Cuando dependemos de fuentes externas CDN, una buena práctica es descargarlas a nuestro proyecto.
+
+- Debido a que no hara un llamado a otros sitios
+- Por ello es importante usarlo dentro de webpack
+- Para esta tarea instalaras y usaras “file-loader” y “url-loader”
+
+instalación con NPM
+
+```jsx
+npm install url-loader file-loader -D
+```
+
+Para aplicar esta configuración debes agregar la siguiente información
+
+```jsx
+output: {
+				...
+        assetModuleFilename: 'assets/images/[hash][ext][query]'
+    },
+...
+module.exports = {
+	...
+  module: {
+    rules: [
+			...
+      {
+        test: /\.(woff|woff2)$/,
+        use: {
+          loader: "url-loader",
+          options: {
+            // limit => limite de tamaño
+            limit: 10000,
+            // Mimetype => tipo de dato
+            mimetype: "application/font-woff",
+            // name => nombre de salida
+            name: "[name].[ext]",
+            // outputPath => donde se va a guardar en la carpeta final
+            outputPath: "./assets/fonts/",
+            publicPath: "./assets/fonts/",
+            esModule:**false**,
+          }
+        }
+      }
+    ]
+  },
+	...
+}
+```
+
+Es importante que dentro de los estilos agregues @font-face
+
+```jsx
+@font-face {
+	font-family: "Ubuntu";
+	src: url("../assets/fonts/ubuntu-regular.woff2") format('woff2'),
+			 url("../assets/fonts/ubuntu-regular.woff") format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+```

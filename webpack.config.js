@@ -13,15 +13,17 @@ module.exports = {
         // Con path.resolve podemos decir dónde va estar la carpeta y la ubicación del mismo
         path: path.resolve(__dirname, 'dist'),
         // filename le pone el nombre al archivo final
-        filename: 'main.js'
+        filename: 'main.js',
+        assetModuleFilename: 'assets/images/[hash][ext][query]'
     },
     // Aqui ponemos las extensiones que tendremos en nuestro proyecto para webpack los lea
     resolve: {
         extensions: ['.js']
     },
     module: {
-        rules: [{
-                // Test declara que extensión de archivos aplicara el loader
+        rules: [
+            {
+                // Test declara la regla con extensión de archivos js
                 test: /\m?js$/,
                 // Exclude permite omitir archivos o carpetas especificas en este caso de node_modules
                 exclude: /node_modules/,
@@ -40,8 +42,29 @@ module.exports = {
                 ]
             },
             {
+                // Regla aplicada a las imagenes en formato png
                 test: /\.png/,
                 type: 'asset/resource'
+            },
+            {
+                //Regla aplicacda a las fuentes
+                test: /\.(woff|woff2)$/,
+                //url-loader, transforma archivos en URI base64.
+                use : {
+                    loader: 'url-loader',
+                    options: {
+                        // limit => limite de tamaño
+                        limit: 10000,
+                        // Mimetype => tipo de dato
+                        mimetype: "application/font-woff",
+                        // name => nombre de salida
+                        name:"[name].[ext]",
+                        // outputPath => donde se va a guardar en la carpeta final
+                        outputPath: './assets/fonts',
+                        publicPath: './assets/fonts',
+                        esModule: false
+                    }
+                }
             }
         ]
     },
@@ -52,8 +75,9 @@ module.exports = {
             template: './public/index.html', // Inyecta la Ruta del TEMPLATE
             filename: './index.html' // Nombre final que tendra el archivo transformado
         }),
-               // Configuracion del Plugin CSS
+        // Configuracion del Plugin CSS
         new MiniCssExtractPlugin(),
+        // Configuracion del Plugin CSS
         new CopyPlugin({
             patterns: [
               {
