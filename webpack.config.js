@@ -1,5 +1,6 @@
 // path elemento de node
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 // objeto con la configuracion deseada
 module.exports = {
@@ -27,5 +28,13 @@ module.exports = {
                 loader: 'babel-loader'
             }
         }]
-    }
+    },
+    plugins: [
+        // Configuracion del Plugin HTML
+        new HtmlWebpackPlugin({
+            inject: true, // Inyecta el BUNDLE al TEMPLATE HTML
+            template: './public/index.html', // Inyecta la Ruta del TEMPLATE
+            filename: './index.html' // Nombre final que tendra el archivo transformado
+        })
+    ]
 }
