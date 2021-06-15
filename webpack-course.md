@@ -20,6 +20,8 @@
 
 [Optimización hashes, compresión y minificación de archivos](null)
 
+[](null)
+
 
 # ¿Qué es Webpack?
 
@@ -469,3 +471,51 @@ module.exports = {
 ```
 
 Cuando nombremos en la configuración de webpack es importante usar [contenthash] para evitar problemas con la cache
+
+
+
+# Variables de entorno
+
+Para instalar debemos correr el comando
+
+```jsx
+npm install -D dotenv-webpack
+```
+
+Posteriormente debemos **crear** un archivo `.env` donde estarán la clave para acceder a la misma y el valor que contendrán.
+
+```jsx
+# Ejemplo
+API=https://randomuser.me/api/
+```
+
+
+
+Es buena idea tener un archivo de ejemplo donde, el mismo si se pueda subir al repositorio como muestra de que campos van a ir, tambien es impo
+
+Una vez creado el archivo `.env` debemos agregar la siguiente configuración en `webpack.config.js`
+
+```jsx
+...
+const Dotenv = require('dotenv-webpack');
+module.exports = {
+	...
+	plugins: [
+			**new** Dotenv()
+			  ],
+}
+```
+
+- dotenv-webpack ⇒ Leera el archivo `.env` por defecto y lo agregar a nuestro proyecto
+
+Para usarlas debes hacer lo siguiente
+
+```jsx
+// La url sera tomada de la variable de entorno
+const API = 'https://randomuser.me/api/';
+
+// Tomando la variable de entorno con Dotenv
+const API = process.env.API;
+```
+
+Toda la configuración se podrá acceder desde `process.env`

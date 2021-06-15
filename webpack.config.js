@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 // objeto con la configuracion deseada
 module.exports = {
@@ -19,7 +20,13 @@ module.exports = {
     },
     // Aqui ponemos las extensiones que tendremos en nuestro proyecto para webpack los lea
     resolve: {
-        extensions: ['.js']
+        extensions: ['.js'],
+        alias: {
+            '@utils': path.resolve(__dirname, 'src/utils/'),
+            '@templates': path.resolve(__dirname, 'src/templates/'),
+            '@styles': path.resolve(__dirname, 'src/styles/'),
+            '@images': path.resolve(__dirname, 'src/assets/images/'),
+          }
     },
     module: {
         rules: [
@@ -61,8 +68,8 @@ module.exports = {
                         // name => nombre de salida
                         name:"[name].[contenthash].[ext]",
                         // outputPath => donde se va a guardar en la carpeta final
-                        outputPath: './assets/fonts',
-                        publicPath: './assets/fonts',
+                        outputPath: "./assets/fonts/",
+                        publicPath: "../assets/fonts/",
                         esModule: false
                     }
                 }
@@ -88,7 +95,8 @@ module.exports = {
                 to: "assets/images"
               }
             ]
-        })
+        }),
+        new Dotenv()
     ],
     optimization: {
         // minificacion de css
