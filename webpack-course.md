@@ -18,6 +18,7 @@
 
 [Loaders de fuentes](null)
 
+[Optimización hashes, compresión y minificación de archivos](null)
 
 
 # ¿Qué es Webpack?
@@ -434,3 +435,37 @@ Es importante que dentro de los estilos agregues @font-face
 	font-style: normal;
 }
 ```
+
+
+# Optimización hashes, compresión y minificación de archivos
+
+Unos de las razones por que utilizamos webpack es porque nos permite optimizar y comprimir nuestro proyecto
+
+- Debes utilizar los siguientes paquetes
+    - **css-minimizer-webpack-plugin** ⇒ Nos ayuda a comprimir nuestros archivos finales CSS
+    - **terser-webpack-plugin** ⇒ Permite minificar de una mejor forma
+- Instalación NPM
+
+```jsx
+npm i css-minimizer-webpack-plugin terser-webpack-plugin -D
+```
+
+Una vez instalado el plugin debemos agregar la siguiente configuración
+
+```jsx
+...
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+**const** TerserPlugin = require('terser-webpack-plugin');
+module.exports = {
+	...
+	optimization: {
+    minimize:**true,**
+    minimizer: [
+			**new** CssMinimizerPlugin(),
+			**new** TerserPlugin()
+		  ]
+   }
+}
+```
+
+Cuando nombremos en la configuración de webpack es importante usar [contenthash] para evitar problemas con la cache
