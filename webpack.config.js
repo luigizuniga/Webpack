@@ -98,7 +98,7 @@ module.exports = {
             ]
         }),
         new Dotenv(),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
     ],
     optimization: {
         // minificacion de css
