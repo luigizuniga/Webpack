@@ -14,6 +14,8 @@ module.exports = {
         filename: '[name][contenthash].js',
         assetModuleFilename: 'assets/images/[hash][ext][query'
     },
+    // Activacion modo escucha
+    watch: true,
     mode:'development',
     resolve: {
         extensions: ['.js'],
